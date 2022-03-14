@@ -2,7 +2,7 @@ from flask import Flask, session
 import pyrebase
 from firebase_admin import firestore, credentials, initialize_app
 
-from app import config, customer_authentication
+from app import config
 
 
 application = Flask(__name__)
@@ -30,8 +30,8 @@ application.secret_key='lmaodead'
 from app import (
     server,
     config,
-    profile,
-    database,
+    # profile,
+    # database,
     customer_authentication,
     shop_authentication
     )

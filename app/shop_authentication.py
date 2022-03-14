@@ -41,7 +41,7 @@ def admin_register():
         try: 
             data = request.form
             email = data.get('email')
-            password = data.get('pwd')
+            password = data.get('password')
             print(email)
             user = auth.create_user_with_email_and_password(email, password)
             user_details = auth.get_account_info(user['idToken'])
