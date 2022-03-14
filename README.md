@@ -1,4 +1,4 @@
-# LAST MILE DELIVERY 🚚
+# INVENTORY MANAGEMENT SYSTEM 🗃️
 ---
 
 ## Pre-requistes
@@ -17,7 +17,7 @@ Cloning the repositry
 <br>
 
 ```
-git clone https://github.com/kshitijdhara/last-mile-delivery.git
+git clone https://github.com/digi11/inventory-management.git
 ```
 <br>
 
