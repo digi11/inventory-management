@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title> Login - Medicine Order system</title>
+        <link rel="stylesheet"  href="{{ url_for('static', filename='css/admin.css') }}">
+    </head>
+
+    <body class="login">
+        <h1 class="text-center">Login</h1>
+        </br></br>
+
+
+
+    </br></br>
+    <!---login form starts here--->
+    <form action="/customer-login" method="POST" class="text-center">
+        Username:</br>
+        <input type="text" name="username" placeholder="username"></br></br>
+        Password:</br>
+        <input type="password" name="password" placeholder="password"></br></br>
+
+        <input type="submit" name="submit" value="Login" class="btn-primary">
+    </form>
+</br>
+
+
+    <p class="text-center"> Created By - <a href="69">69</a></p>
+
+</body>
+</html>

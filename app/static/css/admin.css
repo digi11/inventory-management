@@ -1,0 +1,159 @@
+
+
+*{
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper{
+    padding: 1%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.clearfix{
+    float:none;
+    clear:both;
+}
+
+
+.tbl-full{
+    width: 100%;
+}
+
+.tbl-30{
+    width:30%;
+}
+
+table tr th{
+    border-bottom: 2px solid gray;
+    padding: 1%;
+    text-align: left;
+}
+
+table tr td{
+    padding: 1%;
+
+}
+
+.btn-primary{
+    background-color: rgb(5, 71, 73);
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: teal;
+}
+
+.btn-secondary{
+    background-color: rgb(5, 71, 73);
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-secondary:hover{
+    background-color: teal;
+}
+
+
+.btn-danger{
+    background-color: rgb(180, 34, 34);
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-danger:hover{
+    background-color: rgb(236, 48, 48);
+}
+
+.success{
+    color:rgb(0, 124, 0);
+}
+
+.error{
+    color: crimson;
+}
+
+
+
+/*css for menu*/
+.menu{
+    text-align: center;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+
+.menu ul{
+    list-style-type: none;
+}
+
+.menu ul li{
+    display: inline;
+    padding : 1%
+}
+
+.menu ul li a{
+    text-decoration: none;
+    font-weight : bold;
+    color: rgb(5, 71, 73);
+}
+
+.menu ul li a:hover{
+    color:rgb(10, 155, 155);
+}
+
+/*css ends*/
+
+/*css for content*/
+
+.main-content{
+     background-color: rgb(182, 182, 182);
+     padding:3% 0
+}
+
+.col-4{
+    width: 17%;
+    background-color: white;
+    margin: 2%;
+    padding:2%;
+    float:left;
+}
+
+.col-5{
+    width: 17%;
+    background-color: white;
+    margin: 2%;
+    padding:2%;
+    float:left;
+}
+
+
+/*css for content ends*/
+
+/*---css for footer */
+.footer{
+    background-color: rgb(5, 71, 73);
+    color:white
+}
+
+/*css for login*/
+
+.login{
+    border: 1px solid gray;
+    width: 30%;
+    margin: 7% auto;
+    padding: 2%;
+}
+
