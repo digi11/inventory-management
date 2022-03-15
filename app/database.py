@@ -1,6 +1,6 @@
 from app import application, medicines_collection
 
-from flask import render_template, request, session
+from flask import redirect, render_template, request, session
 
 @application.route('/add-medicine', methods=['GET','POST'])
 def add_medicine():
@@ -30,7 +30,7 @@ def add_medicine():
                 "msg": data
                 }
 
-            return response
+            return redirect('/dashboard')
 
         except Exception as e:
             response = {
@@ -55,7 +55,7 @@ def delete_medicine(med_id):
                 "msg": medicine_uid
                 }
 
-            return response
+            return redirect('/dashboard')
 
         except Exception as e:
             response = {
@@ -113,10 +113,11 @@ def get_one_medicine(med_uid):
             response = {
                 "status": "Success",
                 "type": "Add medicine Success",
-                "msg": inventory
+                "msg": inventory,
+                "med_uid": med_uid
                 }
 
-            return response
+            return render_template('update_medicine.html', medicine = response['msg'], med_uid = response['med_uid'])
 
         except Exception as e:
             response = {
@@ -152,7 +153,7 @@ def update_medicine(med_uid):
                 "msg": med_uid
                 }
 
-            return response
+            return redirect('/dashboard')
 
         except Exception as e:
             response = {
