@@ -1,5 +1,4 @@
 from app import application
-from flask import Flask
 
 # api for base route 
 @application.route('/', methods=['GET'])

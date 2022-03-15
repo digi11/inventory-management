@@ -1,7 +1,7 @@
 from pkg_resources import register_namespace_handler
 from app import application, vehicle_collection
 
-from flask import Flask, request,jsonify
+from flask import request
 
 
 

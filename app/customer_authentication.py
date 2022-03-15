@@ -2,7 +2,7 @@ from logging import exception
 from app import application, auth
 
 
-from flask import Flask, request, session, render_template
+from flask import request, session, render_template
 
 
 # api to facilitate application login for a customer 
@@ -32,9 +32,9 @@ def customer_login():
                 "type": "Login Failed",
                 "msg": e
                 }
-            return response
+            return render_template("error.html", error = response)
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("customer-login.html")
 
 
 # api to facilitate change password functionality for a user

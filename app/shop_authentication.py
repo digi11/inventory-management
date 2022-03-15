@@ -1,7 +1,7 @@
 from app import application, auth
 
 
-from flask import Flask, request, session
+from flask import render_template, request, session
 
 
 # api to facilitate application login for a shop
@@ -30,7 +30,9 @@ def admin_login():
                 "type": "Login Failed",
                 "msg": e
                 }
-            return response
+            return render_template("error.html", error = response)
+    if request.method == "GET":
+        return render_template("admin-login.html")
 
 
 
