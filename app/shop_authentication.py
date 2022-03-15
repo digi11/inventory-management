@@ -1,9 +1,8 @@
 from app import application, auth
 
 
-from flask import render_template, request, session
+from flask import redirect, render_template, request, session
 
-from app.dashboard import dashboard
 
 
 # api to facilitate application login for a shop
@@ -24,7 +23,7 @@ def admin_login():
                 "type": "Login Success",
                 "msg": uid
                 }
-            return render_template("dashboard.html")
+            return redirect('/dashboard')
             
         except Exception as e:
             response = {
@@ -57,7 +56,7 @@ def admin_register():
                 "type": "Register Success",
                 "msg": uid
                 }
-            return render_template("dashboard.html")
+            return redirect('/dashboard')
 
             
         except Exception as e:
@@ -67,3 +66,12 @@ def admin_register():
                 "msg": e
                 }
             return response
+
+@application.route('/logout')
+def logout():
+    session.pop ('uid',None)
+    
+
+    auth.current_user = None
+
+    return redirect('/')
