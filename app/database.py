@@ -101,3 +101,67 @@ def get_medicine():
                 }
             return render_template("error.html", error = response)
 
+
+@application.route('/get-medicine/<med_uid>', methods=['GET'])
+def get_one_medicine(med_uid):
+    if request.method == 'GET':
+        try:
+            
+            print(session['uid'])
+            temp_inventory = medicines_collection.document(med_uid).get()
+            print(temp_inventory)
+            inventory =temp_inventory.to_dict()
+            print("Data => ")
+            print(inventory)            
+
+            response = {
+                "status": "Success",
+                "type": "Add medicine Success",
+                "msg": inventory
+                }
+
+            return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+@application.route('/update-medicine/<med_uid>', methods=['POST'])
+def update_medicine(med_uid):
+    if request.method == 'POST':
+        try:
+            
+            print(session['uid'])
+            result = request.form
+            data = {
+                "name": result.get ('name'),
+                "stock": result.get('stock'),
+                "Description": result.get('description',""),
+                "shopid": session['uid'],
+                "price": result.get('price'),
+
+            }
+            print("Data => ")
+            print(data)            
+
+            medicines_collection.document(med_uid).set(data)
+            
+            response = {
+                "status": "Success",
+                "type": "Update medicine Success",
+                "msg": med_uid
+                }
+
+            return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Update medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
