@@ -1,7 +1,7 @@
 from pkg_resources import register_namespace_handler
 from app import application, shops_collection, users_collection
 
-from flask import render_template, request, session
+from flask import redirect, render_template, request, session
 
 
 
@@ -45,29 +45,28 @@ def update_customer_profile():
 
 
 # api to update admin profile using UID as document id
-@application.route('/update-admin-profile', methods=['POST'])
+@application.route('/update-admin-profile', methods=['POST','GET'])
 def update_admin_profile():
     if request.method == 'POST':
         try:
             result = request.form
             data = {
                 "uid": session['uid'],
-                "email": result.get('email'),
                 "name": result.get('name'),
-                "contact": result.get('contact'),
+                "phone": result.get('phone'),
                 "address": result.get('address'),
             }
             print("Data => ")
             print(data)
-            uid = result.get("uid")
+            uid = session['uid']
             print("UID =>  " + uid)
-            shops_collection.document(uid).set(data)
+            shops_collection.document(uid).update(data)
             response = {
                 "status": "Success",
                 "type": "Update Profile Success",
                 "msg": data
                 }
-            return response
+            return redirect('/admin-profile')
 
         except Exception as e:
             response = {
