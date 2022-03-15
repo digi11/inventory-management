@@ -1,7 +1,7 @@
 from pkg_resources import register_namespace_handler
-from app import application, vehicle_collection
+from app import application, shops_collection, users_collection
 
-from flask import request
+from flask import render_template, request, session
 
 
 
@@ -22,7 +22,7 @@ def update_customer_profile():
             print(data)
             uid = result.get("uid")
             print("UID =>  " + uid)
-            vehicle_collection.document(uid).set(data)
+            users_collection.document(uid).set(data)
             response = {
                 "status": "Success",
                 "type": "Update Profile Success",
@@ -36,7 +36,13 @@ def update_customer_profile():
                 "type": "Update Profile Failed",
                 "msg": e
                 }
-            return response
+            application.logger.error(response)
+            return render_template('error.html', error = response)
+
+    if request.method == 'GET':
+        profile = get_customer_profile(session['uid'])['msg']
+        return render_template('update_profile.html', profile = profile)
+
 
 # api to update admin profile using UID as document id
 @application.route('/update-admin-profile', methods=['POST'])
@@ -45,7 +51,7 @@ def update_admin_profile():
         try:
             result = request.form
             data = {
-                "uid": result.get ('uid'),
+                "uid": session['uid'],
                 "email": result.get('email'),
                 "name": result.get('name'),
                 "contact": result.get('contact'),
@@ -55,7 +61,7 @@ def update_admin_profile():
             print(data)
             uid = result.get("uid")
             print("UID =>  " + uid)
-            vehicle_collection.document(uid).set(data)
+            shops_collection.document(uid).set(data)
             response = {
                 "status": "Success",
                 "type": "Update Profile Success",
@@ -69,14 +75,19 @@ def update_admin_profile():
                 "type": "Update Profile Failed",
                 "msg": e
                 }
-            return response
+            application.logger.error(response)
+            return render_template('error.html', error = response)
 
-# api to get the vehicle profile using UID as input 
-@application.route('/profile/<uid>', methods=['GET'])
-def get_profile(uid):
+    if request.method == 'GET':
+        profile = get_admin_profile(session['uid'])['msg']
+        return render_template('update_profile.html', profile = profile)
+
+# api to get the admin profile using UID as input 
+@application.route('/admin-profile/<uid>', methods=['GET'])
+def get_admin_profile(uid):
     if request.method == 'GET':
         try:
-            profile = vehicle_collection.document(uid).get().to_dict()
+            profile = shops_collection.document(uid).get().to_dict()
             print(profile)
             response = {
               "status": "Success",
@@ -90,34 +101,45 @@ def get_profile(uid):
                 "type": "Get Profile Failed",
                 "msg": e
                 }
-            return response
+            application.logger.error(response)
+            return render_template('error.html', error = response)
 
 
-# api to update the status of the delivery vehicle i,e  either away or active
-@application.route('/updatestatus', methods=['POST'])
-def update_status():
-    if request.method == 'POST':
+
+# api to get the vehicle profile using UID as input 
+@application.route('/customer-profile/<uid>', methods=['GET'])
+def get_customer_profile(uid):
+    if request.method == 'GET':
         try:
-            result = request.form
-            data = {
-                "status": result.get("status")
-            }
-            print("Data => ")
-            print(data)
-            uid = result.get("uid")
-            print("UID =>  " + uid)
-            vehicle_collection.document(uid).update(data)
+            profile = shops_collection.document(uid).get().to_dict()
+            print(profile)
             response = {
-                "status": "Success",
-                "type": "Update Profile Status Success",
-                "msg": data
-                }
+              "status": "Success",
+              "type": "Get Profile Success",
+              "msg": profile  
+            }
             return response
-
         except Exception as e:
             response = {
                 "status": "Failed",
-                "type": "Update Profile Status Failed",
+                "type": "Get Profile Failed",
                 "msg": e
                 }
-            return response
+            application.logger.error(response)
+            return render_template('error.html', error = response)
+
+
+
+@application.route('/admin-profile', methods=['GET'])
+def admin_profile():
+    if request.method == 'GET':
+        profile = get_admin_profile(session['uid'])['msg']
+        return render_template('profile.html', profile = profile)
+
+
+
+@application.route('/customer-profile', methods=['GET'])
+def customer_profile():
+    if request.method == 'GET':
+        profile = get_customer_profile(session['uid'])['msg']
+        return render_template('profile.html', profile = profile)

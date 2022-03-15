@@ -31,7 +31,7 @@ application.secret_key='lmaodead'
 from app import (
     server,
     config,
-    # profile,
+    profile,
     database,
     customer_authentication,
     shop_authentication,
