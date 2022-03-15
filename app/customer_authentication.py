@@ -1,5 +1,6 @@
 from logging import exception
-from app import application, auth
+from unittest import result
+from app import application, auth, users_collection
 
 
 from flask import request, session, render_template
@@ -24,6 +25,7 @@ def customer_login():
                 "type": "Login Success",
                 "msg": uid
                 }
+            application.logger.info(response)
             return response
             
         except Exception as e:
@@ -32,6 +34,7 @@ def customer_login():
                 "type": "Login Failed",
                 "msg": e
                 }
+            application.logger.error(response['msg'])
             return render_template("error.html", error = response)
     if request.method == "GET":
         return render_template("customer-login.html")
@@ -50,14 +53,18 @@ def change_password():
                 "type": "Password Change Success",
                 "msg": "password reset email sent"
                 }
+            application.logger.info(response)
             return response
+            
         except Exception as e:
             response = {
                 "status": "Failed",
                 "type": "Password Reset Failed",
                 "msg": e
                 }
-            return response
+            application.logger.error(response['msg'])
+
+            return render_template('error.html', error = response)
 
 
 # api to facilitate registration of a new customer on the application
@@ -65,13 +72,13 @@ def change_password():
 def customer_register():
     if request.method == 'POST':
         try: 
-            data = request.form
-            email = data.get('email')
-            password = data.get('password')
+            result = request.form
+            email = result.get('email')
+            password = result.get('password')
             print(email)
             user = auth.create_user_with_email_and_password(email, password)
             user_details = auth.get_account_info(user['idToken'])
-            uid = auth.refresh(user['refreshToken'])  
+            uid = auth.refresh(user['refreshToken'])['userId']
 
 
             session['uid'] = uid
@@ -80,7 +87,24 @@ def customer_register():
                 "type": "Register Success",
                 "msg": uid
                 }
-            return response
+
+
+            # add data to shops firestore collection 
+            data = {
+                "uid": uid,
+                "email": result.get('email'),
+                "name": result.get('name'),
+                "address": result.get('address'),
+                "phone": result.get('phone'),
+            }
+            print("Data => ")
+            print(data)
+            print("UID =>  " + uid)
+            users_collection.document(uid).set(data)
+
+            application.logger.info(response)
+
+            return render_template('/')
 
 
         except Exception as e:
@@ -89,4 +113,5 @@ def customer_register():
                 "type": "Register Failed",
                 "msg": e
                 }
-            return response
+            application.logger.error(response)
+            return render_template('error.html', error= response)
