@@ -15,7 +15,7 @@ def add_medicine():
             data = {
                 "name": result.get ('name'),
                 "stock": result.get('stock'),
-                "Description": result.get('description',""),
+                "description": result.get('description',""),
                 "shopid": session['uid'],
                 "price": result.get('price'),
 
@@ -40,17 +40,13 @@ def add_medicine():
                 }
             return render_template("error.html", error = response)
 
-@application.route('/delete-medicine', methods=['POST'])
-def delete_medicine():
-    if request.method == 'GET':
-        return render_template ('add_medicine.html')
-    
+@application.route('/delete-medicine/<med_id>', methods=['POST'])
+def delete_medicine(med_id):    
     if request.method == 'POST':
         try:
             
             print(session['uid'])
-            result = request.form
-            medicine_uid = result.get('med_uid')          
+            medicine_uid = med_id          
 
             medicines_collection.document(medicine_uid).delete()
             response = {
@@ -140,7 +136,7 @@ def update_medicine(med_uid):
             data = {
                 "name": result.get ('name'),
                 "stock": result.get('stock'),
-                "Description": result.get('description',""),
+                "description": result.get('description',""),
                 "shopid": session['uid'],
                 "price": result.get('price'),
 

@@ -34,5 +34,6 @@ from app import (
     # profile,
     database,
     customer_authentication,
-    shop_authentication
+    shop_authentication,
+    dashboard
     )
