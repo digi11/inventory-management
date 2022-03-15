@@ -1,91 +1,103 @@
-from flask.json import jsonify
-from app import application, order_collection, vehicle_collection
-import requests
-from flask import request
+from app import application, medicines_collection
 
-import re
+from flask import render_template, request, session
 
-
-# api to fetch the current active orders 
-@application.route('/getorders', methods=['GET'])
-def get_orders():
+@application.route('/add-medicine', methods=['GET','POST'])
+def add_medicine():
     if request.method == 'GET':
+        return render_template ('add_medicine.html')
+    
+    if request.method == 'POST':
         try:
-            data = order_collection.order_by(u'order_date').stream()
-            active_orders = dict()
-            for doc in data:
-                # print(doc.to_dict())
-                active_orders[doc.id] = doc.to_dict() 
-
-
-            response = {
-                "status": "Success",
-                "type": "Get orders Success",
-                "msg": active_orders
-            }
-            return response
-
-
-        except Exception as e:
-            response = {
-                "status": "Failed",
-                "type": "Get orders Failed",
-                "msg": e
-            }
-            return response
-
-
-
-# api to fetch the current active delivery vehicles 
-@application.route('/getvehicles', methods=['GET'])
-def get_vehicles():
-    if request.method == 'GET':
-        try:
-            data = vehicle_collection.where(u'status' ,u'==', u'active').stream()
-            active_vehicles = dict()
-            for doc in data:
-                print(doc.to_dict())
-                active_vehicles[doc.id] = doc.to_dict() 
-
-
-            response = {
-                "status": "Success",
-                "type": "Get vehicles Success",
-                "msg": {
-                    "number_of_vehicles": len(active_vehicles),
-                    "vehicles": active_vehicles
-                    }
-            }
-            return response
-
-
-        except Exception as e:
-            response = {
-                "status": "Failed",
-                "type": "Get vehicles Failed",
-                "msg": e
-            }
-            return response
-
-
             
-# api to get a list of pickup and delivery addresses from the current active orders 
-@application.route("/getaddresses")
-def get_address():
-    delivery_locations = list()
-    delivery_locations.append("MG+Road+Camp+Pune")
-    orders = get_orders()['msg']
-    print(orders)
-    for key,value in orders.items():
-        print(key)
-        print(value)
-        value['shop_address'] = re.sub(r"\W+","+",value['shop_address'])
-        value['customer_address'] = re.sub(r"\W+","+",value['customer_address'])
-        delivery_locations.append(value['shop_address'])
-        delivery_locations.append(value['customer_address'])
+            print(session['uid'])
+            result = request.form
+            data = {
+                "name": result.get ('name'),
+                "stock": result.get('stock'),
+                "Description": result.get('description',""),
+                "shopid": session['uid'],
+                "price": result.get('price'),
 
-    print(delivery_locations)
-    print(len(delivery_locations))
-    return delivery_locations
-    # return orders
-    # return jsonify(delivery_locations)
+            }
+            print("Data => ")
+            print(data)            
+
+            medicines_collection.document().set(data)
+            response = {
+                "status": "Success",
+                "type": "Add medicine Success",
+                "msg": data
+                }
+
+            return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Add medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+@application.route('/delete-medicine', methods=['POST'])
+def delete_medicine():
+    if request.method == 'GET':
+        return render_template ('add_medicine.html')
+    
+    if request.method == 'POST':
+        try:
+            
+            print(session['uid'])
+            result = request.form
+            medicine_uid = result.get('med_uid')          
+
+            medicines_collection.document(medicine_uid).delete()
+            response = {
+                "status": "Success",
+                "type": "Delete medicine Success",
+                "msg": medicine_uid
+                }
+
+            return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Delete medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+
+@application.route('/get-medicine', methods=['GET'])
+def get_medicine():
+    if request.method == 'GET':
+        try:
+            
+            print(session['uid'])
+            temp_inventory = medicines_collection.where(u'shopid',u'==',session['uid']).stream()
+            inventory = dict()
+            for doc in temp_inventory:
+                # print(doc.to_dict())
+                inventory[doc.id] = doc.to_dict() 
+
+            print("Data => ")
+            print(inventory)            
+
+            response = {
+                "status": "Success",
+                "type": "Add medicine Success",
+                "msg": inventory
+                }
+
+            return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+

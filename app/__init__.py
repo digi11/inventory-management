@@ -23,6 +23,7 @@ db = firestore.client()
 # firebase databases (collections) intialization
 users_collection = db.collection("users") #  users (customers) collection
 shops_collection = db.collection("shops") # shops (pharmacies-admin) database
+medicines_collection = db.collection("medicines") # shops (pharmacies-admin) database
 
 application.secret_key='lmaodead'
 
@@ -31,7 +32,7 @@ from app import (
     server,
     config,
     # profile,
-    # database,
+    database,
     customer_authentication,
     shop_authentication
     )
