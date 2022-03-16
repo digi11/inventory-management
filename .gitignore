@@ -1,4 +1,4 @@
 app/__pycache__/
-app/config.py
-app/firestore_config.json
+*/config.py
+*/firestore_config.json
 __pycache__
