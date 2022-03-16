@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title> Login - Medicine Order system</title>
+        <link rel="stylesheet"  href="{{ url_for('static', filename='css/admin.css') }}">
+    </head>
+
+    <body class="login">
+        <h1 class="text-center">Admin Login</h1>
+        </br></br>
+
+
+
+    </br></br>
+    <!---login form starts here--->
+    <form action="/update-admin-profile" method="GET" class="text-center">
+        <h3>Name: {{ profile['name'] }}</h3>
+        <h3>Phone: {{ profile['phone'] }}</h3>
+        <h3>Address: {{ profile['address'] }}</h3>
+        <h3>Email: {{ profile['email'] }}</h3>
+        <input type="submit" name="submit" value="Edit Profile" class="btn-primary">
+    </form>
+    <br>
+    <br>
+</br>
+
+
+    <p class="text-center"> Created By - <a href="69">69</a></p>
+
+</body>
+</html>

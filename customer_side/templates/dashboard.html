@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <title>Medicine Order Website - Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+
+<body>
+    <!---menu section--->
+    <div class="menu">
+        <div class="wrapper">
+            <ul>
+                <li><a href="/dashboard"> Home </a></li>
+                <li><a href="/admin-profile"> Profile </a></li>                
+                <li><a href="orders.html"> Orders </a></li>
+                <li><a href="/logout"> Logout </a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="main-content">
+        <div class="wrapper">
+            <h1>Dashboard</h1>
+
+            <br></br>
+
+            <form action="/add-medicine" method="GET">
+                <button type="submit" class="btn btn-sm btn-info" name="something"><i
+                        class="fa fa-check"></i>ADD MEDICINE</button>
+            </form>
+
+
+
+
+
+
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,value in medicines.items() %}
+                    <tr>
+                        <td>{{value['name']}}</td>
+                        <td>{{value['description']}}</td>
+                        <td>{{value['price']}}</td>
+                        <td>{{value['stock']}}</td>
+                        <td>
+                            <form action="/get-medicine/{{ key }}" method="GET" id="myForm">
+                                <button type="submit" class="btn btn-sm btn-info" name="something"><i
+                                        class="fa fa-check"></i>UPDATE MEDICINE</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/delete-medicine/{{ key }}" method="POST" id="myForm">
+                                <button type="submit" class="btn btn-sm btn-info" name="something"><i
+                                        class="fa fa-check"></i>DELETE MEDICINE</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+
+            <div class="footer">
+                <div class="wrapper">
+                    <p class="text-center">2021 All rights reserved , Medicinal Store , Developed by Grp 69 </p>
+                </div>
+            </div>
+            <!----footer ends--->
+</body>
+
+</html>
