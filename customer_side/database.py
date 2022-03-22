@@ -7,7 +7,7 @@ from flask import session, render_template,request
 # this is an api to get all medicines from all the shops 
 @application.route('/get-all-medicines', methods=['GET'])
 def get_all_medicines():
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
             print(session['uid'])
             temp_inventory = medicines_collection.stream()
@@ -40,7 +40,7 @@ def get_all_medicines():
 # this is an api to get 10 medicines from any shop at random
 @application.route('/get-10-medicines', methods=['GET'])
 def get_10_medicines():
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
             print(session['uid'])
             temp_inventory = medicines_collection.limit(10)
