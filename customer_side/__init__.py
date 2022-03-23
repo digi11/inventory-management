@@ -23,8 +23,16 @@ default_app = initialize_app(cred)
 db = firestore.client()
 
 
+# firebase databases (collections) intialization
+users_collection = db.collection("users") #  users (customers) collection
+cart_collection = db.collection('cart') # add to cart collection
+orders_collection = db.collection('orders') # orders collections
+medicines_collection = db.collection("medicines") # shops (pharmacies-admin) database
+
 
 
 from customer_side import (
-    server,lmao
+    server,
+    database,
+    authentication
 )

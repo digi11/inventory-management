@@ -5,5 +5,5 @@ from flask import render_template
 # api for base route 
 @application.route('/', methods=['GET'])
 def hello():
-    application.logger.info("Inventory Management server running on localhost:7000")
+    application.logger.info("Inventory Management customer side running on localhost:7001")
     return render_template('base.html')
