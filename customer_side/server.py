@@ -1,4 +1,4 @@
-from customer_side import application
+from customer_side import application, database
 from flask import render_template
 
 
@@ -11,6 +11,8 @@ def hello():
 # api for index page
 @application.route('/index', methods=['GET'])
 def index():
-
+    medicines = database.get_10_medicines()
+    print(medicines)
+    
     application.logger.info("Index page loaded")
-    return render_template('index.html')
+    return render_template('index.html', medicines = medicines)

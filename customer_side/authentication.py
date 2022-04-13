@@ -3,7 +3,7 @@ from unittest import result
 from customer_side import application, auth, users_collection
 
 
-from flask import request, session, render_template
+from flask import redirect, request, session, render_template
 
 
 # api to facilitate application login for a customer 
@@ -26,7 +26,7 @@ def customer_login():
                 "msg": uid
                 }
             application.logger.info(response)
-            return response
+            return redirect('/index')
             
         except Exception as e:
             response = {

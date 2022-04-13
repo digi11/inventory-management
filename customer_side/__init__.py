@@ -7,7 +7,7 @@ from customer_side import config
 
 
 application=Flask(__name__)
-
+application.secret_key='jaapuchkeaa'
 
 
 # set up firebase configs for firebase authentication 
