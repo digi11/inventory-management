@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+
+
+
+<section class="medicine-menu">
+    <div class="container">
+        <h2 class="text-center">Medicine Menu</h2>
+
+        <div class="medicine-menu-box">
+            <div class="medicine-menu-img">
+                <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
+            </div>
+
+            <div class="medicine-menu-desc">
+                <h4>{{value['name']}}</h4>
+                <p class="medicine-price">${{value['price']}}</p>
+                <p class="medicine-detail">
+                    {{value['description']}}
+                </p>
+                <br>
+
+                <a href="order.html" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+    
+
+
+
+        <div class="clearfix"></div>
+
+        
+
+    </div>
+
+    <p class="text-center">
+        <a href="#">See All Medicines</a>
+    </p>
+</section>
+
+
+<section class="footer">
+    <div class="container text-center">
+        <p>All rights reserved. Designed By <a href="#">Group No 69</a></p>
+    </div>
+</section>
+<!-- footer Section Ends Here -->
+
+</html>
