@@ -16,7 +16,7 @@ def add_to_cart():
             if 'cart' not in session:
                 session['cart'] = []
 
-            item = [ request.form['product_name'], request.form['product_image'], request.form['product_description'], request.form['price'] ]
+            item = [ request.form['product_name'], request.form['product_description'], request.form['price'] ]
 
             if item:
                 session['cart'].append(item)

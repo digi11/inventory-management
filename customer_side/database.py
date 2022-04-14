@@ -9,7 +9,7 @@ from flask import session, render_template,request
 def get_all_medicines():
     if request.method == 'GET':
         try:
-            print(session['uid'])
+            # print(session['uid'])
             temp_inventory = medicines_collection.stream()
             inventory = dict()
             for doc in temp_inventory:
@@ -38,12 +38,13 @@ def get_all_medicines():
 
 
 # this is an api to get 10 medicines from any shop at random
-@application.route('/get-10-medicines', methods=['GET'])
-def get_10_medicines():
+@application.route('/get-6-medicines', methods=['GET'])
+def get_6_medicines():
     if request.method == 'GET':
         try:
-            print(session['uid'])
-            temp_inventory = medicines_collection.limit(10)
+            # print(session['uid'])
+            temp_inventory = medicines_collection.limit(6).stream()
+            print(temp_inventory)
             inventory = dict()
             for doc in temp_inventory:
                 # print(doc.to_dict())

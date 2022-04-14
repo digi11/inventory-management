@@ -11,8 +11,8 @@ def hello():
 # api for index page
 @application.route('/index', methods=['GET'])
 def index():
-    medicines = database.get_10_medicines()
+    medicines = database.get_6_medicines()
     print(medicines)
     
     application.logger.info("Index page loaded")
-    return render_template('index.html', medicines = medicines)
+    return render_template('index.html', medicines = medicines['msg'])

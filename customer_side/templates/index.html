@@ -99,23 +99,24 @@
     <section class="medicine-menu">
         <div class="container">
             <h2 class="text-center">Medicine Menu</h2>
-
+            {% for key, value in medicines.items() %}
             <div class="medicine-menu-box">
                 <div class="medicine-menu-img">
                     <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
                 </div>
 
                 <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
+                    <h4>{{value['name']}}</h4>
+                    <p class="medicine-price">${{value['price']}}</p>
                     <p class="medicine-detail">
-                        Desc
+                        {{value['description']}}
                     </p>
                     <br>
 
                     <a href="order.html" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
+            {% endfor %}
 
 
 
