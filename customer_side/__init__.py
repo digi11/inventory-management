@@ -34,5 +34,6 @@ medicines_collection = db.collection("medicines") # shops (pharmacies-admin) dat
 from customer_side import (
     server,
     database,
-    authentication
+    authentication,
+    cart
 )

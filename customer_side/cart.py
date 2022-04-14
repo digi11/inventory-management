@@ -5,7 +5,7 @@ from flask import session, redirect, request, render_template
 
 
 # this is an api to get 10 medicines from any shop at random
-@application.route('/add-to-cart', methods=['POST'])
+@application.route('/add-to-cart', methods=['POST','GET'])
 def add_to_cart():
     if request.method == 'POST':
         try:  
@@ -40,15 +40,15 @@ def add_to_cart():
 
     if request.method == 'GET':
         try:  
-            print(session['cart'])
-            data = session['cart']
+            # print(session['cart'])
+            # data = session['cart']
             response = {
                 "status": "Success",
                 "type": "Get cart Success",
-                "msg": data
+                "msg": "data"
                 }
             application.logger.info(response)
-            return render_template('addcart.html', cart = response['msg'])
+            return render_template('cart.html', cart = response['msg'])
 
         except Exception as e:
             response = {
