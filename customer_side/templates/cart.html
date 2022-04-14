@@ -11,11 +11,49 @@
 </head>
 
 
+<body>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Restaurant Logo" class="img-responsive">
+                </a>
+            </div>
+
+            <div class="menu text-right">
+                <ul>
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="categories.html">Categories</a>
+                    </li>
+                    <li>
+                        <a href="medicines.html">Medicines</a>
+                    </li>
+                    <li>
+                        <a href="/add-to-cart">Cart</a>
+                    </li>
+                    <li>
+                        <a href="order1.html">Orders</a>
+                    </li>
+                    <li>
+                        <a href="/customer-login" >Login</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+
+
 
 
 <section class="medicine-menu">
     <div class="container">
-        <h2 class="text-center">Medicine Menu</h2>
+        <h2 class="text-center">Medicines in Cart</h2>
 
         <div class="medicine-menu-box">
             <div class="medicine-menu-img">
@@ -23,14 +61,19 @@
             </div>
 
             <div class="medicine-menu-desc">
-                <h4>lkfjdlfjdsl</h4>
-                <p class="medicine-price">$price</p>
+                <h4>Combiflam</h4>
+                <p class="medicine-price">$2.3</p>
                 <p class="medicine-detail">
-                    description
+                    Medicine Ingredients
                 </p>
                 <br>
 
-                <a href="order.html" class="btn btn-primary">Add to Cart</a>
+                
+
+                <input type="number" name="name"  size="1">
+
+            
+                
             </div>
         </div>
     
@@ -43,9 +86,11 @@
 
     </div>
 
-    <p class="text-center">
-        <a href="#">See All Medicines</a>
-    </p>
+
+    <a href="order.html" class="btn btn-primary">Order Now</a>
+    
+
+
 </section>
 
 
@@ -55,5 +100,5 @@
     </div>
 </section>
 <!-- footer Section Ends Here -->
-
+</body>
 </html>
