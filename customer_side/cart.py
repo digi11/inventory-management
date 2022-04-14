@@ -13,6 +13,14 @@ def add_to_cart():
             data = {
                 'medicine': medicine
             }
+            if 'cart' not in session:
+                session['cart'] = []
+
+            item = [ request.form['product_name'], request.form['product_image'], request.form['product_description'], request.form['price'] ]
+
+            if item:
+                session['cart'].append(item)
+            session.modified = True
             response = {
                 "status": "Success",
                 "type": "Add to cart Success",
@@ -29,3 +37,5 @@ def add_to_cart():
                 }
             application.logger.error(response)
             return render_template("error.html", error = response)
+
+
