@@ -54,28 +54,23 @@
 <section class="medicine-menu">
     <div class="container">
         <h2 class="text-center">Medicines in Cart</h2>
-
+        {% for value in cart  %}
         <div class="medicine-menu-box">
             <div class="medicine-menu-img">
                 <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
             </div>
 
             <div class="medicine-menu-desc">
-                <h4>Combiflam</h4>
-                <p class="medicine-price">$2.3</p>
+                <h4>{{cart[0]}}</h4>
+                <p class="medicine-price">${{cart[1]}}</p>
                 <p class="medicine-detail">
-                    Medicine Ingredients
+                    {{cart[2]}}
                 </p>
                 <br>
-
-                
-
-                <input type="number" name="name"  size="1">
-
-            
-                
+                <input type="number" name="name"  size="1">    
             </div>
         </div>
+        {% endfor %}
     
 
 

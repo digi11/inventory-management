@@ -42,12 +42,12 @@ def add_to_cart():
 
     if request.method == 'GET':
         try:  
-            # print(session['cart'])
-            # data = session['cart']
+            print(session['cart'])
+            data = session['cart']
             response = {
                 "status": "Success",
                 "type": "Get cart Success",
-                "msg": "data"
+                "msg": data
                 }
             application.logger.info(response)
             return render_template('cart.html', cart = response['msg'])
