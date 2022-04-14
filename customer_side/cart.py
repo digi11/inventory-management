@@ -38,4 +38,23 @@ def add_to_cart():
             application.logger.error(response)
             return render_template("error.html", error = response)
 
+    if request.method == 'GET':
+        try:  
+            print(session['cart'])
+            data = session['cart']
+            response = {
+                "status": "Success",
+                "type": "Get cart Success",
+                "msg": data
+                }
+            application.logger.info(response)
+            return render_template('addcart.html', cart = response['msg'])
 
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Get cart Failed",
+                "msg": e
+                }
+            application.logger.error(response)
+            return render_template("error.html", error = response)
