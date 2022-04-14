@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- Important to make website responsive -->
@@ -16,7 +17,8 @@
         <div class="container">
             <div class="logo">
                 <a href="#" title="Logo">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Restaurant Logo" class="img-responsive">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Restaurant Logo"
+                        class="img-responsive">
                 </a>
             </div>
 
@@ -38,7 +40,7 @@
                         <a href="order1.html">Orders</a>
                     </li>
                     <li>
-                        <a href="/customer-login" >Login</a>
+                        <a href="/customer-login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -51,7 +53,7 @@
     <!-- sEARCH Section Starts Here -->
     <section class="medicine-search text-center">
         <div class="container">
-            
+
             <form action="medicine-search.html" method="POST">
                 <input type="search" name="search" placeholder="Search for Medicine.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
@@ -67,27 +69,27 @@
             <h2 class="text-center">Explore Mediicines</h2>
 
             <a href="category-medicines.html">
-            <div class="box-3 float-container">
-                <img src="static/images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+                <div class="box-3 float-container">
+                    <img src="static/images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Syrup</h3>
-            </div>
+                    <h3 class="float-text text-white">Syrup</h3>
+                </div>
             </a>
 
             <a href="#">
-            <div class="box-3 float-container">
-                <img src="static/images/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                <div class="box-3 float-container">
+                    <img src="static/images/burger.jpg" alt="Burger" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Tablets</h3>
-            </div>
+                    <h3 class="float-text text-white">Tablets</h3>
+                </div>
             </a>
 
             <a href="#">
-            <div class="box-3 float-container">
-                <img src="static/images/momo.jpg" alt="Momo" class="img-responsive img-curve">
+                <div class="box-3 float-container">
+                    <img src="static/images/momo.jpg" alt="Momo" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Capsules</h3>
-            </div>
+                    <h3 class="float-text text-white">Capsules</h3>
+                </div>
 
             </a>
 
@@ -105,17 +107,21 @@
                 <div class="medicine-menu-img">
                     <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
                 </div>
+                <form action="/add-to-cart" method="POST" class="text-center">
+                    <div class="medicine-menu-desc">
+                        <h4>{{value['name']}}</h4>
+                        <input type="hidden" name="name" value="{{value['name']}}">
+                        <input type="hidden" name="price" value="{{value['price']}}">
+                        <input type="hidden" name="description" value="{{value['description']}}">
+                        <p class="medicine-price">${{value['price']}}</p>
+                        <p class="medicine-detail">
+                            {{value['description']}}
+                        </p>
+                        <br>
+                    </div>
+                    <input type="submit" name="submit" value="Add To Cart" class="btn-primary">
+                </form>
 
-                <div class="medicine-menu-desc">
-                    <h4>{{value['name']}}</h4>
-                    <p class="medicine-price">${{value['price']}}</p>
-                    <p class="medicine-detail">
-                        {{value['description']}}
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
             </div>
             {% endfor %}
 
@@ -123,7 +129,7 @@
 
             <div class="clearfix"></div>
 
-            
+
 
         </div>
 
@@ -138,13 +144,13 @@
         <div class="container text-center">
             <ul>
                 <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>
+                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png" /></a>
                 </li>
                 <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
+                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png" /></a>
                 </li>
                 <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
+                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png" /></a>
                 </li>
             </ul>
         </div>
@@ -160,4 +166,5 @@
     <!-- footer Section Ends Here -->
 
 </body>
+
 </html>
