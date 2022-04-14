@@ -9,14 +9,16 @@ from flask import session, redirect, request, render_template
 def add_to_cart():
     if request.method == 'POST':
         try:  
-            medicine = request.form.get('data')
+            medicine = request.form
             data = {
-                'medicine': medicine
+                'name': medicine.get('name'),
+                'price': medicine.get('price'),
+                'desc': medicine.get('description')
             }
             if 'cart' not in session:
                 session['cart'] = []
 
-            item = [ request.form['product_name'], request.form['product_description'], request.form['price'] ]
+            item = [ data['name'], data['desc'], data['price'] ]
 
             if item:
                 session['cart'].append(item)
@@ -27,7 +29,7 @@ def add_to_cart():
                 "msg": data
                 }
             application.logger.info(response)
-            return response
+            return redirect('/index')
 
         except Exception as e:
             response = {
