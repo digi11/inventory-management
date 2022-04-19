@@ -24,7 +24,7 @@
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="/index">Home</a>
                     </li>
                     <li>
                         <a href="categories.html">Categories</a>
@@ -54,35 +54,38 @@
 <section class="medicine-menu">
     <div class="container">
         <h2 class="text-center">Medicines in Cart</h2>
+        <form action="/new-order" method="post">
         {% for value in cart  %}
         <div class="medicine-menu-box">
             <div class="medicine-menu-img">
                 <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
             </div>
-
+            
             <div class="medicine-menu-desc">
-                <h4>{{cart[0]}}</h4>
-                <p class="medicine-price">${{cart[1]}}</p>
+                <h4>{{value[0]}}</h4>
+                <p class="medicine-price">${{value[1]}}</p>
                 <p class="medicine-detail">
-                    {{cart[2]}}
+                    {{value[2]}}
                 </p>
                 <br>
-                <input type="number" name="name"  size="1">    
+                Quantity  
+                <input type="number" name="name" placeholder="1">    
             </div>
         </div>
         {% endfor %}
-    
-
-
-
-        <div class="clearfix"></div>
-
         
-
+        
+        
+        
+        <div class="clearfix"></div>
+        
+        
+        
     </div>
-
-
+    
+    
     <a href="order.html" class="btn btn-primary">Order Now</a>
+</form>
     
 
 
