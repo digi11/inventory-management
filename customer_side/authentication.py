@@ -115,3 +115,6 @@ def customer_register():
                 }
             application.logger.error(response)
             return render_template('error.html', error= response)
+    
+    if request.method == 'GET':
+        return render_template('registration_form.html')
