@@ -68,7 +68,7 @@ def change_password():
 
 
 # api to facilitate registration of a new customer on the application
-@application.route('/customer-register', methods=['POST'])
+@application.route('/customer-register', methods=['POST','GET'])
 def customer_register():
     if request.method == 'POST':
         try: 
@@ -104,7 +104,7 @@ def customer_register():
 
             application.logger.info(response)
 
-            return render_template('/')
+            return redirect('/')
 
 
         except Exception as e:
