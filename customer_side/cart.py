@@ -122,3 +122,21 @@ def new_order():
                 }
             application.logger.error(response)
             return render_template("error.html", error = response)
+
+
+
+@application.route('/orderfin', methods=['POST','GET'])
+def finorder():
+    if request.method == 'POST':
+        try:  
+            application.logger.info(response)
+            return render_template('orderfin.html')
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Order Placed Failed",
+                "msg": e
+                }
+            application.logger.error(response)
+            return render_template("error.html", error = response)
