@@ -18,6 +18,7 @@ def customer_login():
             user = auth.sign_in_with_email_and_password(email, password)
 
             uid = user['localId']
+            session['cart'] = list()
             session['uid'] = uid #used to create a session
 
             response = {

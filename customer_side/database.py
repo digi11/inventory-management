@@ -69,3 +69,35 @@ def get_6_medicines():
                 }
             application.logger.error(response)
             return render_template("error.html", error = response)
+
+
+@application.route('/get-orders', methods=['GET'])
+def get_medicine():
+    if request.method == 'GET':
+        try:
+            
+            print(session['uid'])
+            temp_orders = orders_collection.where(u'buyerid',u'==',session['uid']).stream()
+            orders = dict()
+            for doc in temp_orders:
+                # print(doc.to_dict())
+                orders[doc.id] = doc.to_dict() 
+
+            print("Data => ")
+            print(orders)            
+
+            response = {
+                "status": "Success",
+                "type": "Get Orders Success",
+                "msg": orders
+                }
+
+            return render_template('orders.html' , orders = response['msg'])
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
