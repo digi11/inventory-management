@@ -67,7 +67,7 @@ def add_to_cart():
 def clear_cart():
     if request.method == 'POST':
         try:  
-            session['cart'].pop()
+            session['cart'].clear()
             session.modified = True
             response = {
                 "status": "Success",
