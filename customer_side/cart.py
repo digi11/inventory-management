@@ -1,7 +1,7 @@
 from customer_side import application, orders_collection
 
 from flask import session, redirect, request, render_template
-import uuid
+import uuid, json
 
 
 
@@ -95,7 +95,7 @@ def new_order():
             print(session['cart'])
             count = 0
             order = dict()
-            for i in session:
+            for i in session['cart']:
                 order[count] = {
                     'name': i[0],
                     'price': i[1],
@@ -103,8 +103,12 @@ def new_order():
                     'buyerid':session["uid"]
                 }
                 count = count + 1
-            orders_collection.document(uuid.uuid1().hex).set(order)
-            session['cart'].pop()
+            order_uid = uuid.uuid1().hex
+            print(order_uid)
+            json.loads(json.dumps(order))
+
+            orders_collection.document(order_uid).set(json.loads(json.dumps(order)))
+            session['cart'].clear()
             session.modified = True
             response = {
                 "status": "Success",
@@ -112,7 +116,7 @@ def new_order():
                 "msg": order
                 }
             application.logger.info(response)
-            return render_template('orders.html')
+            return response
 
         except Exception as e:
             response = {
