@@ -14,12 +14,13 @@ def add_to_cart():
             data = {
                 'name': medicine.get('name'),
                 'price': medicine.get('price'),
-                'desc': medicine.get('description')
+                'desc': medicine.get('description'),
+                'shop_address': medicine.get('shop_address'),
             }
             if 'cart' not in session:
                 session['cart'] = []
 
-            item = [ data['name'], data['desc'], data['price'] ]
+            item = [ data['name'], data['desc'], data['price'], data['shop_address'] ]
 
             if item:
                 session['cart'].append(item)
@@ -102,7 +103,8 @@ def new_order():
                     'description': i[2],
                     'buyerid':session["uid"],
                     'quantity': request.form.get(i[0]),
-                    'customer_address': session['user_address']
+                    'customer_address': session['user_address'],
+                    'shop_address':i[3]
                 }
                 count = count + 1
             order_uid = uuid.uuid1().hex
@@ -119,24 +121,6 @@ def new_order():
                 }
             application.logger.info(response)
             return response
-
-        except Exception as e:
-            response = {
-                "status": "Failed",
-                "type": "Order Placed Failed",
-                "msg": e
-                }
-            application.logger.error(response)
-            return render_template("error.html", error = response)
-
-
-
-@application.route('/orderfin', methods=['POST','GET'])
-def finorder():
-    if request.method == 'POST':
-        try:  
-            application.logger.info(response)
-            return render_template('orderfin.html')
 
         except Exception as e:
             response = {
