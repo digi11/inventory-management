@@ -18,6 +18,11 @@ def admin_login():
 
             uid = user['localId']
             session['uid'] = uid # create session for the user on the flask server
+
+            user_data = shops_collection.document(uid).get().to_dict()
+            print('------------------------USER DATA--------------------')
+            print(user_data)
+            session['shop_address'] = user_data['address']
             response = {
                 "status": "Success",
                 "type": "Login Success",
@@ -75,7 +80,7 @@ def admin_register():
             shops_collection.document(uid).set(data)
 
             application.logger.info(response)
-            return redirect('/dashboard')
+            return redirect('/')
 
             
         except Exception as e:
