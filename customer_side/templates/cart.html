@@ -71,7 +71,7 @@
                         </p>
                         <br>
                         Quantity
-                        <input type="number" name="name" id="{{value[0]}}" placeholder="1">
+                        <input type="number" name="{{value[0]}}">
                     </div>
                 </div>
                 {% endfor %}
@@ -80,13 +80,13 @@
 
 
                 <div class="clearfix"></div>
+                <input type="submit" value="Order Now" name="upvote" class="btn btn-primary">
 
 
 
         </div>
 
 
-        <input type="submit" value="Order Now" name="upvote" class="btn btn-primary">
 
         </form>
         <form action="/clear-cart" method="post">
