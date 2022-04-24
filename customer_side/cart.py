@@ -100,7 +100,8 @@ def new_order():
                     'name': i[0],
                     'price': i[1],
                     'description': i[2],
-                    'buyerid':session["uid"]
+                    'buyerid':session["uid"],
+                    'quantity': request.form.get(i[0])
                 }
                 count = count + 1
             order_uid = uuid.uuid1().hex

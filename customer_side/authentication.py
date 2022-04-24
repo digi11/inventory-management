@@ -20,6 +20,12 @@ def customer_login():
             uid = user['localId']
             session['cart'] = list()
             session['uid'] = uid #used to create a session
+            print(uid)
+            user_data = users_collection.document(uid).get().to_dict()
+            print('------------------------USER DATA--------------------')
+            print(user_data)
+            session['user_address'] = user_data['address']
+
 
             response = {
                 "status": "Success",
@@ -119,3 +125,13 @@ def customer_register():
     
     if request.method == 'GET':
         return render_template('registration_form.html')
+
+
+@application.route('/logout')
+def logout():
+
+    session.clear() #terminate the session on flask side
+    
+    auth.current_user = None # set the current user to none on the firebase side
+
+    return redirect('/')
