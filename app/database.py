@@ -19,6 +19,7 @@ def add_medicine():
                 "shopid": session['uid'],
                 "price": result.get('price'),
                 "shop_address": session['address'],
+                "category": result.get('category')
 
             }
             print("Data => ")
@@ -142,6 +143,8 @@ def update_medicine(med_uid):
                 "shopid": session['uid'],
                 "price": result.get('price'),
                 "shop_address": session['shop_address'],
+                "category": result.get('category')
+
 
 
             }

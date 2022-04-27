@@ -16,3 +16,10 @@ def index():
     
     application.logger.info("Index page loaded")
     return render_template('index.html', medicines = medicines['msg'])
+
+
+# api for base route 
+@application.route('/contact', methods=['GET'])
+def contact():
+    application.logger.info("You got Rick Rolled")
+    return render_template('contact.html')

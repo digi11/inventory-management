@@ -25,7 +25,7 @@ def get_all_medicines():
                 "msg": inventory
                 }
             application.logger.info(response)
-            return response
+            return render_template('medicines.html', medicines=response['msg'])
 
         except Exception as e:
             response = {

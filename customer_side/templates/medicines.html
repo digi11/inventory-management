@@ -7,7 +7,7 @@
     <title>Medicine Website</title>
 
     <!-- Link our CSS file -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
@@ -33,6 +33,9 @@
                     </li>
                     <li>
                         <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -61,108 +64,30 @@
     <section class="medicine-menu">
         <div class="container">
             <h2 class="text-center">Medicine Menu</h2>
-
+            {% for key, value in medicines.items() %}
             <div class="medicine-menu-box">
                 <div class="medicine-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Dolo" class="img-responsive img-curve">
+                    <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
                 </div>
+                <form action="/add-to-cart" method="POST" class="text-center">
+                    <div class="medicine-menu-desc">
+                        <h4>{{value['name']}}</h4>
+                        <input type="hidden" name="name" value="{{value['name']}}">
+                        <input type="hidden" name="price" value="{{value['price']}}">
+                        <input type="hidden" name="description" value="{{value['description']}}">
+                        <p class="medicine-price">${{value['price']}}</p>
+                        <p class="medicine-detail">
+                            {{value['description']}}
+                        </p>
+                        <input type="hidden" name="shop_address" value="{{value['shop_address']}}">
 
-                <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
-                    <p class="medicine-detail">
-                        Desc
-                    </p>
-                    <br>
+                        <br>
+                    </div>
+                    <input type="submit" name="submit" value="Add To Cart" class="btn-primary">
+                </form>
 
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
             </div>
-
-            <div class="medicine-menu-box">
-                <div class="medicine-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Dolo" class="img-responsive img-curve">
-                </div>
-
-                <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
-                    <p class="medicine-detail">
-                        Desc
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="medicine-menu-box">
-                <div class="medicine-menu-img">
-                    <img src="images/menu-burger.jpg" alt="Dolo" class="img-responsive img-curve">
-                </div>
-
-                <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
-                    <p class="medicine-detail">
-                        Desc
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="medicine-menu-box">
-                <div class="medicine-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Dolo" class="img-responsive img-curve">
-                </div>
-
-                <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
-                    <p class="medicine-detail">
-                        Desc
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="medicine-menu-box">
-                <div class="medicine-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Dolo" class="img-responsive img-curve">
-                </div>
-
-                <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
-                    <p class="medicine-detail">
-                        Desc
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-
-            <div class="medicine-menu-box">
-                <div class="medicine-menu-img">
-                    <img src="images/menu-momo.jpg" alt="Dolo" class="img-responsive img-curve">
-                </div>
-
-                <div class="medicine-menu-desc">
-                    <h4>Medicine Title</h4>
-                    <p class="medicine-price">$2.3</p>
-                    <p class="medicine-detail">
-                        Desc
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
+            {% endfor %}
 
 
             <div class="clearfix"></div>
