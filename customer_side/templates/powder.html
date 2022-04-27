@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+
+<body>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Restaurant Logo"
+                        class="img-responsive">
+                </a>
+            </div>
+
+            <div class="menu text-right">
+                <ul>
+                    <li>
+                        <a href="/index">Home</a>
+                    </li>
+                    <li>
+                        <a href="categories.html">Categories</a>
+                    </li>
+                    <li>
+                        <a href="medicines.html">Medicines</a>
+                    </li>
+                    <li>
+                        <a href="/add-to-cart">Cart</a>
+                    </li>
+                    <li>
+                        <a href="order1.html">Orders</a>
+                    </li>
+                    <li>
+                        <a href="/customer-login">Login</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </section>
+
+
+
+
+    <section class="medicine-menu">
+        <div class="container">
+            <h2 class="text-center">Medicines in Cart</h2>
+            {% for key, value in powder.items() %}
+            <div class="medicine-menu-box">
+                <div class="medicine-menu-img">
+                    <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
+                </div>
+                <form action="/add-to-cart" method="POST" class="text-center">
+                    <div class="medicine-menu-desc">
+                        <h4>{{value['name']}}</h4>
+                        <input type="hidden" name="name" value="{{value['name']}}">
+                        <input type="hidden" name="price" value="{{value['price']}}">
+                        <input type="hidden" name="description" value="{{value['description']}}">
+                        <input type="hidden" name="category" value="{{value['category']}}">
+                        <p class="medicine-price">Price:  ${{value['price']}}</p>
+                        <p class="medicine-detail">Description:  
+                            {{value['description']}}
+                        </p>
+                        <p class="medicine-price">Category:  {{value['category']}}</p>
+                        <input type="hidden" name="shop_address" value="{{value['shop_address']}}">
+
+                        <br>
+                    </div>
+                    <input type="submit" name="submit" value="Add To Cart" class="btn-primary">
+                </form>
+
+            </div>
+            {% endfor %}
+                <div class="clearfix"></div>
+
+
+
+        </div>
+
+    </section>
+
+
+    <section class="footer">
+        <div class="container text-center">
+            <p>All rights reserved. Designed By <a href="#">Group No 69</a></p>
+        </div>
+    </section>
+    <!-- footer Section Ends Here -->
+</body>
+
+</html>

@@ -101,3 +101,97 @@ def get_medicine():
                 "msg": e
                 }
             return render_template("error.html", error = response)
+
+@application.route('/tablets', methods=['GET'])
+def tablets():
+    if request.method == 'GET':
+        try:
+            
+            tablets = medicines_collection.where(u'category',u'==',u'tablet').stream()
+            print(tablets)
+            inventory = dict()
+            for doc in tablets:
+                # print(doc.to_dict())
+                inventory[doc.id] = doc.to_dict() 
+
+            print("Data => ")
+            print(inventory)            
+
+            response = {
+                "status": "Success",
+                "type": "Get Tablets Success",
+                "msg": inventory
+                }
+
+            return render_template('tablets.html' , tablet = response['msg'])
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get tablets Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+
+@application.route('/syrup', methods=['GET'])
+def syrup():
+    if request.method == 'GET':
+        try:
+               # print(session['uid'])
+            syrup = medicines_collection.where(u'category',u'==',u'syrup').stream()
+            print(syrup)
+            inventory = dict()
+            for doc in syrup:
+                # print(doc.to_dict())
+                inventory[doc.id] = doc.to_dict() 
+
+            print("Data => ")
+            print(inventory)            
+
+            response = {
+                "status": "Success",
+                "type": "Get Tablets Success",
+                "msg": inventory
+                }
+
+            return render_template('syrup.html' , syrup = response['msg'])
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get tablets Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+
+@application.route('/powder', methods=['GET'])
+def powder():
+    if request.method == 'GET':
+        try:
+            powder = medicines_collection.where(u'category',u'==',u'powder').stream()
+            print(powder)
+            inventory = dict()
+            for doc in powder:
+                # print(doc.to_dict())
+                inventory[doc.id] = doc.to_dict() 
+
+            print("Data => ")
+            print(inventory)            
+
+            response = {
+                "status": "Success",
+                "type": "Get Powder Success",
+                "msg": inventory
+                }
+
+            return render_template('powder.html' , powder = response['msg'])
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get Powder Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)

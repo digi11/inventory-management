@@ -73,9 +73,9 @@
 
             <a href="category-medicines.html">
                 <div class="box-3 float-container">
-                    <img src="static/images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+                    <a href="/syrup"><img src="static/images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
 
-                    <h3 class="float-text text-white">Syrup</h3>
+                    <h3 class="float-text text-white">Syrup</h3></a>
                 </div>
             </a>
 
@@ -116,10 +116,12 @@
                         <input type="hidden" name="name" value="{{value['name']}}">
                         <input type="hidden" name="price" value="{{value['price']}}">
                         <input type="hidden" name="description" value="{{value['description']}}">
+                        <input type="hidden" name="category" value="{{value['category']}}">
                         <p class="medicine-price">${{value['price']}}</p>
                         <p class="medicine-detail">
                             {{value['description']}}
                         </p>
+                        <p class="medicine-price">{{value['category']}}</p>
                         <input type="hidden" name="shop_address" value="{{value['shop_address']}}">
 
                         <br>
