@@ -26,7 +26,14 @@
                 <td><label for="name">Stock: </label></td>
                 <td><input id="stock" maxlength="50" name="stock" type="number" value="{{ medicine['stock'] }}"/></td>
             </tr>
-
+            <label for="cars">Category:</label>
+            <tr>
+            <select name="category" id="category">
+                <option value="tablet">Tablet</option>
+                <option value="syrup">Syrup</option>
+                <option value="powder">Powder</option>
+            </select>
+            </tr>
             <tr>
                 <td align="right"><input name="Submit" type="Submit" value="Add" /></td>
             </tr>
