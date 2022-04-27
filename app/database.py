@@ -18,7 +18,7 @@ def add_medicine():
                 "description": result.get('description',""),
                 "shopid": session['uid'],
                 "price": result.get('price'),
-                "shop_address": session['address'],
+                "shop_address": session['shop_address'],
                 "category": result.get('category')
 
             }
