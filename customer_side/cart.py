@@ -92,12 +92,13 @@ def clear_cart():
 @application.route('/new-order', methods=['POST','GET'])
 def new_order():
     if request.method == 'POST':
-        try:  
+        try:
+            print('---------------NEW ORDER ----------------')  
             print(session['cart'])
             count = 0
             order = dict()
             for i in session['cart']:
-                order[count] = {
+                order[str(count)] = {
                     'name': i[0],
                     'price': i[1],
                     'description': i[2],
@@ -107,6 +108,7 @@ def new_order():
                     'shop_address':i[3]
                 }
                 count = count + 1
+            order['buyer_id'] = session['uid']
             order_uid = uuid.uuid1().hex
             print(order_uid)
             json.loads(json.dumps(order))
@@ -120,7 +122,7 @@ def new_order():
                 "msg": order
                 }
             application.logger.info(response)
-            return response
+            return redirect('/get-orders')
 
         except Exception as e:
             response = {

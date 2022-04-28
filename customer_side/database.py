@@ -72,20 +72,19 @@ def get_6_medicines():
 
 
 @application.route('/get-orders', methods=['GET'])
-def get_medicine():
+def get_orders():
     if request.method == 'GET':
         try:
             
             print(session['uid'])
-            temp_orders = orders_collection.where(u'buyerid',u'==',session['uid']).stream()
+            temp_orders = orders_collection.where(u'buyer_id',u'==',session['uid']).stream()
             orders = dict()
             for doc in temp_orders:
                 # print(doc.to_dict())
                 orders[doc.id] = doc.to_dict() 
 
             print("Data => ")
-            print(orders)            
-
+            print(orders)
             response = {
                 "status": "Success",
                 "type": "Get Orders Success",
@@ -187,6 +186,23 @@ def powder():
                 }
 
             return render_template('powder.html' , powder = response['msg'])
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get Powder Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+
+
+@application.route('/categories', methods=['GET'])
+def categpries():
+    if request.method == 'GET':
+        try:
+        
+            return render_template('categories.html')
 
         except Exception as e:
             response = {
