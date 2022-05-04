@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+
+<body>
+    <!-- Navbar Section Starts Here -->
+    <section class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#" title="Logo">
+                    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Restaurant Logo"
+                        class="img-responsive">
+                </a>
+            </div>
+
+            <!---menu section--->
+    <div class="menu">
+        <div class="wrapper">
+            <ul>
+                <li><a href="/dashboard"> Home </a></li>
+                <li><a href="/admin-profile"> Profile </a></li>                
+                <li><a href="/get-orders"> Orders </a></li>
+                <li><a href="/logout"> Logout </a></li>
+            </ul>
+        </div>
+    </div>
+    </section>
+
+
+
+
+    <section class="medicine-menu">
+        <div class="container">
+            <h2 class="text-center">Your Orders</h2>
+            {% for key, value in orders.items() %}
+            <div class="medicine-menu-box">
+                <div class="medicine-menu-img">
+                    <img src="static/images/Medicine_Category_290.jpeg" alt="dolo" class="img-responsive img-curve">
+                </div>
+                    <div class="medicine-menu-desc">
+                        <h4>{{value['name']}}</h4>
+                        <p class="medicine-price">Description:  {{value['price']}}</p>
+                        <p class="medicine-price">Buyer ID:  {{value['buyerid']}}</p>
+                        <p class="medicine-price">Quantity:  {{value['quantity']}}</p>
+                        <p class="medicine-price">Price:  {{value['price']}}</p>
+                        <p class="medicine-detail">Price:  
+                            ${{value['description']}}
+                        </p>
+                        <p class="medicine-price">Category:  {{value['category']}}</p>
+
+                        <br>
+                    </div>
+
+            </div>
+            {% endfor %}
+                <div class="clearfix"></div>
+
+
+
+        </div>
+
+    </section>
+
+
+    <section class="footer">
+        <div class="container text-center">
+            <p>All rights reserved. Designed By <a href="#">Group No 69</a></p>
+        </div>
+    </section>
+    <!-- footer Section Ends Here -->
+</body>
+
+</html>

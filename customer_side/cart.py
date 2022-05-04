@@ -1,4 +1,4 @@
-from customer_side import application, orders_collection
+from customer_side import application, orders_collection, shop_orders_collection
 
 from flask import session, redirect, request, render_template
 import uuid, json
@@ -105,10 +105,13 @@ def new_order():
                     'buyerid':session["uid"],
                     'quantity': request.form.get(i[0]),
                     'customer_address': session['user_address'],
-                    'shop_address':i[3]
+                    'shop_address':i[3],
+                    'buyer_address': session['user_address']
                 }
+                shop_orders_collection.document().set(order[str(count)])
                 count = count + 1
             order['buyer_id'] = session['uid']
+            order['buyer_address'] = session['user_address']
             order_uid = uuid.uuid1().hex
             print(order_uid)
             json.loads(json.dumps(order))

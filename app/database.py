@@ -1,4 +1,4 @@
-from app import application, medicines_collection
+from app import application, medicines_collection, shop_orders_collection
 
 from flask import redirect, render_template, request, session
 
@@ -165,6 +165,38 @@ def update_medicine(med_uid):
             response = {
                 "status": "Failed",
                 "type": "Update medicine Failed",
+                "msg": e
+                }
+            return render_template("error.html", error = response)
+
+@application.route('/get-orders', methods=['GET'])
+def get_orders():
+    if request.method == 'GET':
+        try:
+            
+            print(session['uid'])
+            temp_inventory = shop_orders_collection.where(u'shop_address',u'==',session['shop_address']).stream()
+            inventory = dict()
+            for doc in temp_inventory:
+                # print(doc.to_dict())
+                inventory[doc.id] = doc.to_dict() 
+
+            print("Data => ")
+            print(inventory)            
+
+            response = {
+                "status": "Success",
+                "type": "get orders Success",
+                "msg": inventory
+                }
+
+            return render_template('orders.html', orders=response['msg'])
+            # return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "get medicine Failed",
                 "msg": e
                 }
             return render_template("error.html", error = response)

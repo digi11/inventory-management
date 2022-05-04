@@ -27,7 +27,7 @@ db = firestore.client()
 users_collection = db.collection("users") #  users (customers) collection
 orders_collection = db.collection('orders') # orders collections
 medicines_collection = db.collection("medicines") # shops (pharmacies-admin) database
-
+shop_orders_collection = db.collection('shop orders') # shops collections
 
 
 from customer_side import (

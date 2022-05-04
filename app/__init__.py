@@ -24,6 +24,7 @@ db = firestore.client()
 users_collection = db.collection("users") #  users (customers) collection
 shops_collection = db.collection("shops") # shops (pharmacies-admin) database
 medicines_collection = db.collection("medicines") # shops (pharmacies-admin) database
+shop_orders_collection = db.collection("shop orders") # shops (pharmacies-admin) database
 
 application.secret_key='lmaodead'
 
