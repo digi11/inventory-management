@@ -38,14 +38,27 @@ pip install -r requirements.txt
 ```
 <br>
 
-Running the **Server**
+Running the **ADMIN Server**
 
 ```
 python application.py
 ```
 <br>
 
-To check if application is running open http://localhost:7000
+To check if admin application is running open http://localhost:7000
+> response should be
+> "Inventory management server is running" 
+
+<br>
+
+Running the **Customer Side Server**
+
+```
+python customer_app.py
+```
+<br>
+
+To check if customer side application is running open http://localhost:7001
 > response should be
 > "Inventory management server is running" 
 
