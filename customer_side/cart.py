@@ -1,3 +1,4 @@
+from datetime import datetime
 from customer_side import application, orders_collection, shop_orders_collection
 
 from flask import session, redirect, request, render_template
@@ -106,7 +107,8 @@ def new_order():
                     'quantity': request.form.get(i[0]),
                     'customer_address': session['user_address'],
                     'shop_address':i[3],
-                    'buyer_address': session['user_address']
+                    'buyer_address': session['user_address'],
+                    'timestamp': datetime.now()
                 }
                 shop_orders_collection.document().set(order[str(count)])
                 count = count + 1
