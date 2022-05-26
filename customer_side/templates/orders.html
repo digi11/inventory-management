@@ -62,6 +62,8 @@
                 {% for key,value in orders.items() %}
                 {% for h,i in value.items() %}
                 {% if h != 'buyer_id' %}
+                {% if h != 'buyer_address' %}
+                {% if h != 'timestamp' %}
                 <div class="medicine-menu-box">
                     <div class="medicine-menu-img">
                         <img src="static/images/menu-pizza.jpg" alt="dolo" class="img-responsive img-curve">
@@ -72,10 +74,10 @@
                         <p class="medicine-detail">
                             {{i['description']}}
                         </p>
-                        <br>
-                        Category: {{ i['category']}}
                     </div>
                 </div>
+                {% endif %}
+                {% endif %}
                 {% endif %}
                 {% endfor %}
                 {% endfor %}

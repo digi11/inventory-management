@@ -1,7 +1,7 @@
 from customer_side import users_collection, orders_collection, medicines_collection, application
 
 from flask import session, render_template,request
-
+from firebase_admin import firestore
 
 
 # this is an api to get all medicines from all the shops 
@@ -198,7 +198,7 @@ def powder():
 
 
 @application.route('/categories', methods=['GET'])
-def categpries():
+def categories():
     if request.method == 'GET':
         try:
         
