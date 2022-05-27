@@ -61,7 +61,7 @@ def change_password():
                 "msg": "password reset email sent"
                 }
             application.logger.info(response)
-            return response
+            return redirect("/")
             
         except Exception as e:
             response = {
